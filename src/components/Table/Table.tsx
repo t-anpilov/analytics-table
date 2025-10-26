@@ -1,10 +1,9 @@
 import React from 'react';
 import { TableHeader } from './TableHeader';
-interface Props {
-    initialData: number[];
-};
 
-export const Table: React.FC<Props> = ({ initialData }) => {
+export const Table: React.FC = () => {
+
+    const initialData: any[] = [];
 
     return (
         <table>

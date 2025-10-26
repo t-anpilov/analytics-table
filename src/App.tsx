@@ -1,12 +1,19 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { SetupPanel } from './components/SetupPanel';
 import { Table } from './components/Table';
 
 function App() {
     return (
-        <>
-            <SetupPanel />
-            <Table initialData={[]} />
-        </>    
+        <BrowserRouter>
+            <Routes>
+                <Route
+                    path={'/'} Component={SetupPanel} key={'create'}
+                />
+                <Route
+                    path={'/table'} Component={Table} key={'table'}
+                />
+            </Routes>  
+        </BrowserRouter>  
   );
 }
 
