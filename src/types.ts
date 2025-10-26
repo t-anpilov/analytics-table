@@ -9,3 +9,14 @@ export type Cell = {
 export type DataRow = Cell[];
 
 export type SataSet = DataRow[];
+
+export type TableParameters = {
+    m: number | '';
+    n: number | '';
+    x: number | '';
+};
+
+export type InputLimits = {
+    min: number;
+    max: number;
+};

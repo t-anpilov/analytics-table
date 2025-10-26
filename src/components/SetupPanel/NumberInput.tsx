@@ -5,7 +5,6 @@ interface Props {
     onChange: (value: number | '') => void;
     min?: number;
     max?: number;
-    disabled?: boolean
 };
 
 export const NumberInput: React.FC<Props> = ({ 
@@ -20,8 +19,13 @@ export const NumberInput: React.FC<Props> = ({
 
     const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value === '' ? '' : Number(event.target.value);
-        onChange(value);
-    }, []);
+
+        console.log('input:', min, max, value)
+
+        if (value === "" || (value >= (min ?? 0) && value <= (max ?? 999))) {
+            onChange(value);
+        };        
+    }, [min, max, onChange]);
 
     return(
         <div>
