@@ -3,7 +3,7 @@ interface Props {
     ColumnCount: number;
 };
 
-export const TableHeader = ({ ColumnCount }: Props) => {
+export const TableHeader: React.FC<Props> = ({ ColumnCount }) => {
 
     const createHeaderCells = useCallback((n: number) => {
         const cells = [];

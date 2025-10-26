@@ -4,7 +4,7 @@ interface Props {
     initialData: number[];
 };
 
-export const Table = ({ initialData }: Props) => {
+export const Table: React.FC<Props> = ({ initialData }) => {
 
     return (
         <table>
