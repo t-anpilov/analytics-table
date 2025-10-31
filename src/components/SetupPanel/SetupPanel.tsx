@@ -2,41 +2,43 @@ import { useCallback, useEffect, useState } from "react";
 import { NumberInput } from "./NumberInput";
 import { MAX_COLUMNS, MAX_ROWS } from "./constants";
 import { InputLimits, TableParameters } from "../../types";
-import { calculateXLimits } from "../../utils";
+import { calculateXLimits, createNumbersArray } from "../../utils"; 
+import { useTableContext } from "../../context";
+import { useNavigate } from "react-router-dom";
 
 export const SetupPanel: React.FC = () => {
 
-    const [params, setParams] = useState<TableParameters>({ m: '', n: '', x: '' });
+    const { params, setParams, generateTable } = useTableContext();
+    const navigate = useNavigate();
     const [xLimits, setXLimits] = useState<InputLimits | null>(null);
 
     const handleSubmit = useCallback((event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log('TBD');
-    }, []);
+        generateTable();
+        navigate('/table');
+    }, [generateTable, navigate]);
 
     const setRowsNumber = useCallback((value: number | '') => {
-        setParams((p) => ({ ...p, m: value }));
-    }, []);
+        setParams((prev) => ({ ...prev, m: value }));
+    }, [setParams]);
 
     const setColumnsNumber = useCallback((value: number | '') => {
-        setParams((p) => ({ ...p, n: value }));
-    }, []);
+        setParams((prev) => ({ ...prev, n: value }));
+    }, [setParams]);
 
     const setXParameter = useCallback((value: number | '') => {
-        setParams((p) => ({ ...p, x: value }));
-    }, []);
+        setParams((prev) => ({ ...prev, x: value }));
+    }, [setParams]);
 
     useEffect(() => {
         if(!params.m || !params.n) {
             setXLimits(null);
         }
-
         if (params.m && params.n) {
             setXLimits(
                 calculateXLimits(params.m, params.n)
             );
-        }
-        
+        }        
     }, [params]);
 
 

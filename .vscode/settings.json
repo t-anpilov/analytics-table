@@ -5,6 +5,8 @@
   "typescript.format.insertSpaceAfterCommaDelimiter": true,
   "typescript.format.insertSpaceAfterSemicolonInForStatements": true,
   "typescript.format.insertSpaceBeforeAndAfterBinaryOperators": true,
-  "prettier.tabWidth": 4,
-  "prettier.useTabs": false
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+},
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"]
 }

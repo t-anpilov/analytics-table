@@ -1,6 +1,5 @@
 {
   "extends": [
-    "react-app/jest",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:import/errors",
@@ -12,7 +11,10 @@
     "react-hooks"
   ],
   "rules": {
-    "react-hooks/rules-of-hooks": "error", 
-    "react-hooks/exhaustive-deps": "warn" 
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/set-state-in-effect": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off"
   }
 }

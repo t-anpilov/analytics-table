@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { ReactElement, useCallback } from 'react';
 import { TableHeader } from './TableHeader';
+import { useTableContext } from '../../context';
+import { TableRow } from './TableRow';
 
 export const Table: React.FC = () => {
 
-    const initialData: any[] = [];
+    const { params, data } = useTableContext();
+
+    const parseRows = useCallback(() => {
+        const rows: ReactElement[] = [];
+        if (data) {
+            data.forEach((item, index)=> {
+                rows.push(<TableRow data={item} key={index} index={index} />)
+            })
+        }       
+
+        return rows;
+
+    }, [data]);
 
     return (
-        <table>
-            <TableHeader ColumnCount={initialData.length} />
-            <tbody>
-                {
-                    initialData.map((dataItem) => dataItem)
-                }
-            </tbody>
-        </table>
+        <>
+        {
+            data && <table>
+                <TableHeader columnCount={params.n} />
+                <tbody>{parseRows()}</tbody>
+            </table>
+        }
+        </>
+        
     );
 };

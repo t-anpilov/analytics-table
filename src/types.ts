@@ -1,14 +1,14 @@
-type CellId = number;
+type cellId = number;
 type CellValue = number;
 
 export type Cell = {
-    id: CellId,
+    id: cellId,
     amount: CellValue
     };
 
 export type DataRow = Cell[];
 
-export type SataSet = DataRow[];
+export type DataSet = DataRow[];
 
 export type TableParameters = {
     m: number | '';

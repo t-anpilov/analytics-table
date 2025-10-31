@@ -20,8 +20,6 @@ export const NumberInput: React.FC<Props> = ({
     const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value === '' ? '' : Number(event.target.value);
 
-        console.log('input:', min, max, value)
-
         if (value === "" || (value >= (min ?? 0) && value <= (max ?? 999))) {
             onChange(value);
         };        
