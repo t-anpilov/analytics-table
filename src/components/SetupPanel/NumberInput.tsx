@@ -15,7 +15,7 @@ export const NumberInput: React.FC<Props> = ({
     max
  }: Props) => {
 
-    const inputId = useMemo(() => label.replace(/\s+/g, ''), []);
+    const inputId = useMemo(() => label.replace(/\s+/g, ''), [label]);
 
     const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value === '' ? '' : Number(event.target.value);

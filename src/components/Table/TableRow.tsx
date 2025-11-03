@@ -1,4 +1,6 @@
+import { useTableContext } from "../../context";
 import { DataRow } from "../../types";
+import { DataCell } from "./DataCell";
 
 interface Props {
     data: DataRow;
@@ -7,6 +9,7 @@ interface Props {
 
 export const TableRow = ({ data, index }: Props) => {
 
+    const { removeRow } = useTableContext();
 
     return(
     <tr>
@@ -14,10 +17,20 @@ export const TableRow = ({ data, index }: Props) => {
             Cell Value M = {index + 1}
         </td>
         {
-            data.map((dataItem) => <td key={dataItem.id}>{dataItem.amount}</td>)
+            data.map((dataItem) => {
+                return (<DataCell key={dataItem.id} cell={dataItem} />)
+            })
         }
         <td>
-
+            <span>
+                {data.reduce((acc, element) => acc + element.amount, 0)}
+            </span>
+            <button
+                onClick={() => removeRow(index)}
+                className=""
+            >
+                -
+            </button>
         </td>
     </tr>
     );
