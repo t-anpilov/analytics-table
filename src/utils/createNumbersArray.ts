@@ -1,12 +1,13 @@
+import { MAX_COLUMNS } from "../constants";
 import { DataRow, DataSet, TableParameters } from "../types";
 
-const getRandomNumber = () => Math.round(Math.random() * 100); 
+const getRandomNumber = () => Math.round(Math.random() * 100);
 
 export const createRandomValuesRow = (columns: number, index: number) => {
     const newRow: DataRow = [];            
     for (let i = 0; i < columns; i++) {
             newRow.push({
-                id: (index + 1) * 100 + (i + 1), // creates unique number for the current table
+                id: (index + 1) * MAX_COLUMNS + (i + 1), // creates unique number for the current table
                 amount: getRandomNumber(),
             });
         }

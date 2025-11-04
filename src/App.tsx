@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { SetupPanel } from './components/SetupPanel';
 import { Table } from './components/Table';
+import './App.css';
 
 function App() {
     return (

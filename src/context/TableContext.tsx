@@ -1,27 +1,45 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
-import { Cell, DataSet, TableParameters } from '../types';
-import { createNumbersArray, createRandomValuesRow } from '../utils';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import { DataSet, TableParameters } from '../types';
+import { createNumbersArray, createRandomValuesRow, loadFromLocalStorage, removeFromLocalStorage, saveToLocalStorage } from '../utils';
 
 interface TableContextValue {
     params: TableParameters;
     data: DataSet | null;
-    setParams: React.Dispatch<React.SetStateAction<TableParameters>>;
-    generateTable: () => void;
     totalRows: number;
+    highlightedIds: number[];
+    setParams: React.Dispatch<React.SetStateAction<TableParameters>>;
+    generateTable: () => void;    
     updateCell: (cellId: number) => void;
     addRow: (columnCount: number) => void;
     removeRow: (rowIndex: number) => void;
+    setHighlightedCells: (data: DataSet, hoveredId: number, highlightCount: number) => void; 
+    clearHighlightedCells: () => void;   
 }
 
 const TableContext = createContext<TableContextValue | undefined>(undefined);
 
 export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [params, setParams] = useState<TableParameters>({ m: '', n: '', x: '' });
-    const [data, setData] = useState<DataSet>([]);
-    const [totalRows, setTotalRows] = useState<number>(0); // It is used for ensuring unique ids for cells
+
+    const [params, setParams] = useState<TableParameters>(
+        () => loadFromLocalStorage('tableParams', { m: '', n: '', x: '' })
+    );
+    const [data, setData] = useState<DataSet>(
+        () => loadFromLocalStorage('tableData', [])
+    );
+    // It is used for ensuring unique ids for cells:
+    const [totalRows, setTotalRows] = useState<number>( 
+        () => loadFromLocalStorage('totalRows', 0)
+    ); 
+    const [highlightedIds, setHighlightedIds] = useState<number[]>([]);
+
+    useEffect(() => saveToLocalStorage('tableParams', params), [params]);
+    useEffect(() => saveToLocalStorage('tableData', data), [data]);
+    useEffect(() => saveToLocalStorage('totalRows', totalRows), [totalRows]);
+    
     const generateTable = () => {
         if (typeof params.m === 'number' && typeof params.n === 'number') {
             const generated = createNumbersArray(params);
+            // removeFromLocalStorage('totalRows');
             setTotalRows(params.m);
             setData(generated);
         }
@@ -68,17 +86,41 @@ export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         });
     };
 
+    const setHighlightedCells = (data: DataSet, hoveredId: number, highlightCount: number) => {
+        
+        const cells = data.flat();
+        const hoveredCell = cells.find((cell) => cell.id === hoveredId);
+        if (!hoveredCell) return;
+
+        const sorted = cells
+            .filter((cell) => cell.id !== hoveredId)
+            .sort((a, b) => {
+                return (
+                    Math.abs(a.amount - hoveredCell.amount) - Math.abs(b.amount - hoveredCell.amount)
+                )
+            });
+
+        setHighlightedIds(sorted.slice(0, highlightCount).map((cell) => cell.id));
+    };
+
+    const clearHighlightedCells = () => {
+        setHighlightedIds([]);
+    };
+
     return (
         <TableContext.Provider
             value={{
                 params,
                 data,
                 totalRows,
+                highlightedIds,
                 setParams,
                 generateTable,
                 updateCell,
                 addRow,
                 removeRow,
+                clearHighlightedCells,
+                setHighlightedCells,
             }}
         >
             {children}

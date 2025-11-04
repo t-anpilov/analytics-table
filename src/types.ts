@@ -4,7 +4,7 @@ type CellValue = number;
 export type Cell = {
     id: cellId,
     amount: CellValue
-    };
+};
 
 export type DataRow = Cell[];
 

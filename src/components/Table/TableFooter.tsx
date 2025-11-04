@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useTableContext } from '../../context';
 import { calculateColumnPct } from '../../utils';
+import { PERCENTILE } from '../../constants';
 interface Props {
     columnCount: number | '';
 };
@@ -9,9 +10,7 @@ export const TableFooter: React.FC<Props> = ({ columnCount }) => {
 
     const columnNumbers = useMemo(() => Array.from(Array(columnCount as number).keys()), [columnCount]);
 
-    const { data } = useTableContext();
-
-    const PERCENTILE = 60
+    const { data } = useTableContext();    
 
     return(
         <tfoot>

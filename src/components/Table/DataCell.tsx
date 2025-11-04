@@ -7,12 +7,28 @@ interface Props {
 
 export const DataCell = ({ cell }: Props) => {
 
-    const { updateCell } = useTableContext();
+    const { 
+        data, 
+        params,
+        updateCell, 
+        highlightedIds,
+        setHighlightedCells ,
+        clearHighlightedCells,
+    } = useTableContext();
+
+    const isHighlighted = highlightedIds.includes(cell.id);
+
+    const onHoverHandler = () => {
+        if (!data || typeof params.x !== 'number') return;
+        setHighlightedCells(data, cell.id, params.x);
+    };
 
     return(
         <td
-            className=""
+            className={isHighlighted ? 'highlightedCell dataCell' : 'dataCell'}
             onClick={() => updateCell(cell.id)}
+            onMouseEnter={onHoverHandler}  
+            onMouseLeave={clearHighlightedCells}        
         >
             {cell.amount}
         </td>

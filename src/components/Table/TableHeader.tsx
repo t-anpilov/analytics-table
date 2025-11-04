@@ -18,7 +18,7 @@ export const TableHeader: React.FC<Props> = ({ columnCount }) => {
                 {
                     columnNumbers.map((num) => {
                         return (
-                            <th key={'h' + num}>Cell values N = {num + 1}</th>
+                            <th key={'h' + num}>Cell values N={num + 1}</th>
                         )
                     })
                 }

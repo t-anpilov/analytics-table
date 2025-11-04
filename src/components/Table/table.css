@@ -1,0 +1,63 @@
+.tableContainer {
+    width: 100%;
+    padding: 30px 40px;
+} 
+
+table {
+    width: 100%;
+    border-collapse: collapse;    
+    font-size: 0.95rem;
+    user-select: none;
+}
+
+thead {
+    background-color: #929eaa;
+    text-align: left;
+}
+
+th, td {
+    padding: 8px 12px;
+    border: 1px solid black;    
+}
+
+td {
+    white-space: nowrap;
+}
+
+p { margin: 0 }
+
+.dataCell {
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sumCell {
+    cursor: pointer;    
+}
+
+.dataCell:hover {
+    background-color: #814f32;
+}
+
+.highlightedCell {
+    background-color: #cfa98a;
+}
+
+.removeButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.removeButton {
+    height: 24px;
+    padding: 0 6px;
+    border-radius: 6px;
+    font: 700 0.75rem/1 sans-serif;
+    line-height: 1;
+    color: white;
+    background-color: rgb(255, 94, 94);
+}
+
+.addButton {
+    margin-top: 24px;
+}

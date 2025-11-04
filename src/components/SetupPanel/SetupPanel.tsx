@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { NumberInput } from "./NumberInput";
-import { MAX_COLUMNS, MAX_ROWS } from "./constants";
+import { MAX_COLUMNS, MAX_ROWS } from "../../constants";
 import { InputLimits, TableParameters } from "../../types";
 import { calculateXLimits, createNumbersArray } from "../../utils"; 
 import { useTableContext } from "../../context";
