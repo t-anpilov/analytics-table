@@ -9,9 +9,9 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-    <React.StrictMode>
+    // <React.StrictMode> Disabled for testing
         <TableProvider>
             <App />
         </TableProvider>        
-    </React.StrictMode>
+    // </React.StrictMode>
 );
