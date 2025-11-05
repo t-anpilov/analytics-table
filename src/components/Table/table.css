@@ -40,7 +40,22 @@ p { margin: 0 }
 }
 
 .percentageCell {
-    background-color: var(--color-percentage-cell);
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.percentageCell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(var(--color-heat-map), var(--alpha, 0));
+    z-index: -1;
+}
+
+.percentageCell > * {
+    position: relative;
+    z-index: 1;
 }
 
 .removeButtonContainer {

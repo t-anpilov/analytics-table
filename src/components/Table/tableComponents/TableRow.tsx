@@ -13,10 +13,16 @@ export const TableRow = ({ data, index }: Props) => {
 
     const [showPercentage, setShowPercentage] = useState<boolean>(false);
     const valuesSum = data.reduce((acc, item) => acc + item.amount, 0);
+    const maxValue = Math.max(...data.map(item => item.amount));
 
     const calculatePercent = useCallback((value: number) => {
         return Math.round( value / valuesSum * 1000 ) / 10
     }, [valuesSum]);
+
+    const calculatePercentOfMax = useCallback(
+        (value: number) => (maxValue > 0 ? (value / maxValue) * 100 : 0),
+        [maxValue]
+    );
 
     return(
     <tr>
@@ -28,7 +34,13 @@ export const TableRow = ({ data, index }: Props) => {
                 })
             ) : (
                 data.map((dataItem) => {
-                    return (<PercentCell key={dataItem.id} value={calculatePercent(dataItem.amount)} />)
+                    return (
+                        <PercentCell 
+                            key={dataItem.id} 
+                            value={calculatePercent(dataItem.amount)} 
+                            heat={calculatePercentOfMax(dataItem.amount)}
+                        />
+                    )
                 })    
             )            
         }
