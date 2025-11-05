@@ -26,7 +26,7 @@ export const NumberInput: React.FC<Props> = ({
     }, [min, max, onChange]);
 
     return(
-        <div>
+        <div className="inputContainer">
             <label 
                 htmlFor={inputId}
             >

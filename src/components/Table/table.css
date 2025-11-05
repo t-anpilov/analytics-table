@@ -5,13 +5,13 @@
 } 
 
 table {
-    border-collapse: collapse;    
+    border-collapse: collapse;
     font-size: 0.95rem;
     user-select: none;
 }
 
 thead {
-    background-color: var(--color-layout);
+    background-color: var(--color-secondary-layout);
     text-align: left;
 }
 
@@ -20,12 +20,23 @@ th, td {
     border: 1px solid black;    
 }
 
+th, tr td:first-child {
+    font-weight: 500;
+}
+
 td {
     white-space: nowrap;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 p { margin: 0 }
+
+.actionCell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 200px;
+}
 
 .dataCell, .sumCell {
     cursor: pointer;    
@@ -63,6 +74,12 @@ p { margin: 0 }
     justify-content: flex-end;
 }
 
+.revertButton {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .removeButton {
     height: 18px;
     margin-top: 6px;
@@ -71,15 +88,16 @@ p { margin: 0 }
     font: 700 0.75rem/1 sans-serif;
 }
 
+.removeButton:hover:not(:disabled) {
+    color: var(--color-remove-text);
+    background-color: var(--color-remove-hover-bg);
+    border-color: var(--color-remove-hover-border);
+}
+
 .addButton {    
     width: 80px;
 }
 
-.revertButton {
-    width: 150px;
-    display: flex;
-    justify-content: space-between;
-}
 
 .iconContainer {
     display: flex;

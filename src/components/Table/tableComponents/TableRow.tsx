@@ -26,7 +26,9 @@ export const TableRow = ({ data, index }: Props) => {
 
     return(
     <tr>
-        <ActionCell index={index} />
+        <td>
+            <ActionCell index={index} />
+        </td>        
         {
             !showPercentage ? (
                 data.map((dataItem) => {

@@ -10,9 +10,9 @@ body {
 
 button {
     all: unset;
-    padding: 8px;
+    padding: 8px 14px;
     cursor: pointer;
-    background-color: var(--color-layout);
+    background-color: var(--color-secondary-layout);
     border: 2px solid var(--color-button-border);  
     border-radius: 6px;  
     text-align: center;    
@@ -21,7 +21,7 @@ button {
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-button:hover {
-    background-color: var(--color-layout-hovered);
+button:hover:not(:disabled) {
+    background-color: var(--color-button-hovered);
     border-color: var(--color-border-hovered);
 }

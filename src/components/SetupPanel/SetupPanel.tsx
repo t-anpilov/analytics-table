@@ -5,6 +5,7 @@ import { InputLimits } from "types";
 import { calculateXLimits } from "utils"; 
 import { useTableContext } from "context";
 import { useNavigate } from "react-router-dom";
+import './setupPanel.css';
 
 export const SetupPanel: React.FC = () => {
 
@@ -40,27 +41,26 @@ export const SetupPanel: React.FC = () => {
             );
         }        
     }, [params]);
-
-
     
     return(
-        <section>
-            <h5>
+        <section className="panelContainer">
+            <h5 className="headerText">
                 Enter Table Parameters
             </h5>
             <form
                 onSubmit={handleSubmit}
+                className="formContainer"
             >
 
                 <NumberInput 
-                    label="Enter M: rows count" 
+                    label="Enter M (rows count):" 
                     value={params.m} 
                     onChange={(val) => setRowsNumber(val)} 
                     min={1}
                     max={MAX_ROWS}
                 />
                 <NumberInput 
-                    label="Enter N: columns count" 
+                    label="Enter N (columns count):" 
                     value={params.n} 
                     onChange={(val) => setColumnsNumber(val)} 
                     min={1}
@@ -68,7 +68,7 @@ export const SetupPanel: React.FC = () => {
                 />
                 {xLimits && (                      
                     <NumberInput 
-                        label={`Choose X: must be between ${xLimits.min} and ${xLimits.max}`}
+                        label={`Choose X (must be between ${xLimits.min} and ${xLimits.max}):`}
                         value={params.x}
                         onChange={(val) => setXParameter(val)} 
                         min={xLimits.min}
@@ -76,9 +76,10 @@ export const SetupPanel: React.FC = () => {
                     />
                 )}
                 <button
-                    disabled={!(params.m && params.n && params.x)}
+                    disabled={!params.m || !params.n || !params.x}
+                    className="createButton"
                 >
-                    Create Table
+                    Generate Table
                 </button>
             </form>
         </section>

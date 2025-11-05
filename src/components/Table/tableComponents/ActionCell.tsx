@@ -9,7 +9,7 @@ export const ActionCell = ({ index }: Props) => {
     const { removeRow } = useTableContext();
 
     return(
-        <td>
+        <div className="actionCell">
             <p>
                 Cell Value M={index + 1}
             </p>
@@ -18,9 +18,9 @@ export const ActionCell = ({ index }: Props) => {
                     onClick={() => removeRow(index)}
                     className="removeButton"
                 >
-                    Remove Row
+                    Remove
                 </button>
             </div>
-        </td>
+        </div>
     );
 };
