@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { useTableContext } from '../../context';
-import { calculateColumnPct } from '../../utils';
-import { PERCENTILE } from '../../constants';
+import { useTableContext } from 'context';
+import { calculateColumnPct } from 'utils';
+import { PERCENTILE } from 'myConstants';
 interface Props {
     columnCount: number | '';
 };

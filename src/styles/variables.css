@@ -1,0 +1,10 @@
+:root {
+    --color-primary: #333;
+    --color-layout: #f5f5f5c0;
+    --color-button-border: #d1d1d1;
+    --color-layout-hovered: #e8e8e8;
+    --color-border-hovered: #bfbfbf; 
+    --color-choosen-cell: #ac7e64;
+    --color-nearest-cell: #e4c7b0;
+    --color-percentage-cell: #c0e1ee;
+}

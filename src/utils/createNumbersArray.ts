@@ -1,5 +1,5 @@
-import { MAX_COLUMNS } from "../constants";
-import { DataRow, DataSet, TableParameters } from "../types";
+import { MAX_COLUMNS } from "myConstants";
+import { DataRow, DataSet, TableParameters } from "types";
 
 const getRandomNumber = () => Math.round(Math.random() * 100);
 

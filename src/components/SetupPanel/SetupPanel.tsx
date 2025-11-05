@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { NumberInput } from "./NumberInput";
-import { MAX_COLUMNS, MAX_ROWS } from "../../constants";
-import { InputLimits, TableParameters } from "../../types";
-import { calculateXLimits, createNumbersArray } from "../../utils"; 
-import { useTableContext } from "../../context";
+import { MAX_COLUMNS, MAX_ROWS } from "myConstants";
+import { InputLimits } from "types";
+import { calculateXLimits } from "utils"; 
+import { useTableContext } from "context";
 import { useNavigate } from "react-router-dom";
 
 export const SetupPanel: React.FC = () => {

@@ -1,5 +1,5 @@
-import { useTableContext } from "../../context";
-import { Cell } from "../../types";
+import { useTableContext } from "context";
+import { Cell } from "types";
 
 interface Props {
     cell: Cell;

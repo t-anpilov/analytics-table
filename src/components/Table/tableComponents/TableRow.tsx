@@ -1,7 +1,8 @@
-import { useCallback, useMemo, useState } from "react";
-import { useTableContext } from "../../context";
-import { DataRow } from "../../types";
+import { useCallback, useState } from "react";
 import { DataCell } from "./DataCell";
+import { PercentCell } from "./PercentCell";
+import { ActionCell } from "./ActionCell";
+import { DataRow } from "types";
 
 interface Props {
     data: DataRow;
@@ -10,28 +11,16 @@ interface Props {
 
 export const TableRow = ({ data, index }: Props) => {
 
-    const { removeRow } = useTableContext();
-
     const [showPercentage, setShowPercentage] = useState<boolean>(false);
     const valuesSum = data.reduce((acc, item) => acc + item.amount, 0);
 
     const calculatePercent = useCallback((value: number) => {
-        return Math.round( value / valuesSum * 1000 ) / 10 + ' %'
+        return Math.round( value / valuesSum * 1000 ) / 10
     }, [valuesSum]);
 
     return(
     <tr>
-        <td>
-            <p>Cell Value M={index + 1}</p>
-            <div className="removeButtonContainer">
-                <button
-                    onClick={() => removeRow(index)}
-                    className="removeButton"
-                >
-                    Remove Row
-                </button>
-            </div>
-        </td>
+        <ActionCell index={index} />
         {
             !showPercentage ? (
                 data.map((dataItem) => {
@@ -39,11 +28,10 @@ export const TableRow = ({ data, index }: Props) => {
                 })
             ) : (
                 data.map((dataItem) => {
-                    return (<td key={dataItem.id}>{calculatePercent(dataItem.amount)}</td>)
+                    return (<PercentCell key={dataItem.id} value={calculatePercent(dataItem.amount)} />)
                 })    
             )            
         }
-
         <td
             className="sumCell"
             onMouseEnter={() => setShowPercentage(true)}

@@ -1,4 +1,4 @@
-import { DataSet } from "../types"
+import { DataSet } from "types"
 
 export const calculateColumnPct = ( data: DataSet, index: number, pct: number) => {
     if (data.length === 0) {

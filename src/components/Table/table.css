@@ -1,17 +1,17 @@
 .tableContainer {
-    width: 100%;
     padding: 30px 40px;
+    display: grid;
+    gap: 24px;
 } 
 
 table {
-    width: 100%;
     border-collapse: collapse;    
     font-size: 0.95rem;
     user-select: none;
 }
 
 thead {
-    background-color: #929eaa;
+    background-color: var(--color-layout);
     text-align: left;
 }
 
@@ -22,25 +22,25 @@ th, td {
 
 td {
     white-space: nowrap;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 p { margin: 0 }
 
-.dataCell {
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.sumCell {
+.dataCell, .sumCell {
     cursor: pointer;    
 }
 
 .dataCell:hover {
-    background-color: #814f32;
+    background-color: var(--color-choosen-cell);
 }
 
 .highlightedCell {
-    background-color: #cfa98a;
+    background-color: var(--color-nearest-cell);
+}
+
+.percentageCell {
+    background-color: var(--color-percentage-cell);
 }
 
 .removeButtonContainer {
@@ -49,15 +49,24 @@ p { margin: 0 }
 }
 
 .removeButton {
-    height: 24px;
+    height: 18px;
+    margin-top: 6px;
     padding: 0 6px;
     border-radius: 6px;
     font: 700 0.75rem/1 sans-serif;
-    line-height: 1;
-    color: white;
-    background-color: rgb(255, 94, 94);
 }
 
-.addButton {
-    margin-top: 24px;
+.addButton {    
+    width: 80px;
+}
+
+.revertButton {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
 }

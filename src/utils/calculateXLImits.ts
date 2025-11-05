@@ -1,4 +1,4 @@
-import { InputLimits } from "../types";
+import { InputLimits } from "types";
 
 export const calculateXLimits = (m: number, n: number): InputLimits => {
 
