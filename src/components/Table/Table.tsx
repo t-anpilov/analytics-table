@@ -6,6 +6,7 @@ import { TableFooter } from './tableComponents';
 import { RevertButton } from './tableComponents';
 import { useNavigate } from 'react-router-dom';
 import './table.css';
+import { AddButton } from './tableComponents/AddButton';
 
 export const Table: React.FC = () => {
     const { params, data, addRow } = useTableContext();
@@ -17,7 +18,10 @@ export const Table: React.FC = () => {
         <>
             {data && data.length > 0 && (
                 <div className="tableContainer">
-                    <RevertButton onClickHandler={createNewTable} />
+                    <div className="buttonsContainer">
+                        <RevertButton onClickHandler={createNewTable} />
+                        <AddButton onClickHandler={addRow} columns={params.n} />
+                    </div>
                     <table>
                         <TableHeader columnCount={params.n} />
                         <tbody>
@@ -27,9 +31,6 @@ export const Table: React.FC = () => {
                         </tbody>
                         <TableFooter columnCount={params.n} />
                     </table>
-                    <button onClick={() => addRow(params.n || 0)} className="addButton">
-                        Add Row
-                    </button>
                 </div>
             )}
         </>

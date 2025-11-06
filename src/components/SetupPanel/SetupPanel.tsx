@@ -23,14 +23,14 @@ export const SetupPanel: React.FC = () => {
 
     const setRowsNumber = useCallback(
         (value: number | '') => {
-            setParams((prev) => ({ ...prev, m: value }));
+            setParams((prev) => ({ ...prev, m: value, x: '' }));
         },
         [setParams],
     );
 
     const setColumnsNumber = useCallback(
         (value: number | '') => {
-            setParams((prev) => ({ ...prev, n: value }));
+            setParams((prev) => ({ ...prev, n: value, x: '' }));
         },
         [setParams],
     );

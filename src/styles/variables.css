@@ -13,5 +13,7 @@
 
     --color-remove-hover-bg: #f1cccc;
     --color-remove-hover-border: #d8a8a8;
-    --color-remove-text: #a33a3a;
+    --color-text-red: #d32f2f;
+    --color-shadow-red: #ff8282;
+    --color-error-bg: #ffeced;
 }

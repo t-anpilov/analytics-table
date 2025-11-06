@@ -4,7 +4,6 @@ import {
     createNumbersArray,
     createRandomValuesRow,
     loadFromLocalStorage,
-    removeFromLocalStorage,
     saveToLocalStorage,
 } from '../utils';
 
@@ -40,7 +39,6 @@ export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const generateTable = () => {
         if (typeof params.m === 'number' && typeof params.n === 'number') {
             const generated = createNumbersArray(params);
-            // removeFromLocalStorage('totalRows');
             setTotalRows(params.m);
             setData(generated);
         }
@@ -68,7 +66,7 @@ export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
     const addRow = (columnCount: number) => {
         setData((prev) => {
-            if (!prev || !params.n) return prev;
+            if (!prev || !columnCount) return prev;
 
             const newData = [...prev];
             const newRowsCount = totalRows + 1;

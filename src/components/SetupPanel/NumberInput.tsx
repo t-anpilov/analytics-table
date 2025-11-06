@@ -3,18 +3,26 @@ interface Props {
     label: string;
     value: number | '';
     onChange: (value: number | '') => void;
-    min?: number;
-    max?: number;
+    min: number;
+    max: number;
+    required?: boolean;
 }
 
-export const NumberInput: React.FC<Props> = ({ label, value, onChange, min, max }: Props) => {
+export const NumberInput: React.FC<Props> = ({
+    label,
+    value,
+    onChange,
+    min,
+    max,
+    required = true,
+}: Props) => {
     const inputId = useMemo(() => label.replace(/\s+/g, ''), [label]);
 
     const onChangeHandler = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
             const enteredValue = event.target.value === '' ? '' : Number(event.target.value);
             if (enteredValue === '') {
-                onChange('');
+                onChange(''); // user clears field
                 return;
             }
 
@@ -24,7 +32,7 @@ export const NumberInput: React.FC<Props> = ({ label, value, onChange, min, max 
                 return;
             }
 
-            if (value >= (min ?? 0) && value <= (max ?? 999)) {
+            if (value >= min && value <= max) {
                 onChange(value);
             }
         },
@@ -33,7 +41,9 @@ export const NumberInput: React.FC<Props> = ({ label, value, onChange, min, max 
 
     return (
         <div className="inputContainer">
-            <label htmlFor={inputId}>{label}</label>
+            <label htmlFor={inputId}>
+                {label} <span className="requiredMark">*</span>
+            </label>
             <input
                 id={inputId}
                 type="number"
@@ -41,6 +51,7 @@ export const NumberInput: React.FC<Props> = ({ label, value, onChange, min, max 
                 onChange={onChangeHandler}
                 min={min}
                 max={max}
+                required={required}
             />
         </div>
     );

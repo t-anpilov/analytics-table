@@ -35,6 +35,12 @@
     color: #555;
 }
 
+.requiredMark {
+    color: var(--color-text-red);
+    margin-left: 2px;
+    font-weight: bold;
+}
+
 .inputContainer input {
     border: 1px solid var(--color-button-border);
     min-width: 80px;
@@ -47,10 +53,17 @@
         box-shadow 0.2s;
 }
 
-.inputContainer input:focus {
+.inputContainer input:focus:not(:invalid) {
     border-color: var(--color-input-hovered);
     box-shadow: 0 0 0 3px rgba(var(--color-input-shadow), 0.15);
     outline: none;
+}
+
+.inputContainer input:required:invalid {
+    border-color: var(--color-text-red);
+    box-shadow: 0 0 0 3px rgba(var(--color-shadow-red), 0.15);
+    outline: none;
+    background-color: var(--color-error-bg);
 }
 
 .createButton {

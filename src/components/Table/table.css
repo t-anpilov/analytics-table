@@ -77,15 +77,29 @@ p {
     z-index: 1;
 }
 
-.removeButtonContainer {
+.buttonsContainer {
     display: flex;
-    justify-content: flex-end;
+    gap: 24px;
 }
 
 .revertButton {
     width: 150px;
     display: flex;
     justify-content: space-between;
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+}
+
+.addButton {
+    width: fit-content;
+}
+
+.removeButtonContainer {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .removeButton {
@@ -97,16 +111,7 @@ p {
 }
 
 .removeButton:hover:not(:disabled) {
-    color: var(--color-remove-text);
+    color: var(--color-text-red);
     background-color: var(--color-remove-hover-bg);
     border-color: var(--color-remove-hover-border);
-}
-
-.addButton {
-    width: 80px;
-}
-
-.iconContainer {
-    display: flex;
-    align-items: center;
 }
