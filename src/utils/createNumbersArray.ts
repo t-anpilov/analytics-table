@@ -1,7 +1,7 @@
 import { MAX_COLUMNS } from 'myConstants';
 import { DataRow, DataSet, TableParameters } from 'types';
 
-const getRandomNumber = () => Math.round(Math.random() * 100);
+const getRandomNumber = () => Math.ceil(Math.random() * 100);
 
 export const createRandomValuesRow = (columns: number, index: number) => {
     const newRow: DataRow = [];

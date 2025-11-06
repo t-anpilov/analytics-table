@@ -1,12 +1,8 @@
 import React, { useCallback } from 'react';
 import { useTableContext } from 'context';
-import { TableHeader } from './tableComponents';
-import { TableRow } from './tableComponents';
-import { TableFooter } from './tableComponents';
-import { RevertButton } from './tableComponents';
 import { useNavigate } from 'react-router-dom';
+import { AddButton, RevertButton, TableFooter, TableHeader, TableRow } from './tableComponents';
 import './table.css';
-import { AddButton } from './tableComponents/AddButton';
 
 export const Table: React.FC = () => {
     const { params, data, addRow } = useTableContext();

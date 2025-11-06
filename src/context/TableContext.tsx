@@ -3,6 +3,7 @@ import { DataSet, TableParameters } from '../types';
 import {
     createNumbersArray,
     createRandomValuesRow,
+    getClosestCells,
     loadFromLocalStorage,
     saveToLocalStorage,
 } from '../utils';
@@ -28,8 +29,7 @@ export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         loadFromLocalStorage('tableParams', { m: '', n: '', x: '' }),
     );
     const [data, setData] = useState<DataSet>(() => loadFromLocalStorage('tableData', []));
-    // It is used for ensuring unique ids for cells:
-    const [totalRows, setTotalRows] = useState<number>(() => loadFromLocalStorage('totalRows', 0));
+    const [totalRows, setTotalRows] = useState<number>(() => loadFromLocalStorage('totalRows', 0)); // It is used for ensuring unique ids for cells
     const [highlightedIds, setHighlightedIds] = useState<number[]>([]);
 
     useEffect(() => saveToLocalStorage('tableParams', params), [params]);
@@ -89,19 +89,8 @@ export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
     const setHighlightedCells = (data: DataSet, hoveredId: number, highlightCount: number) => {
         const cells = data.flat();
-        const hoveredCell = cells.find((cell) => cell.id === hoveredId);
-        if (!hoveredCell) return;
-
-        const sorted = cells
-            .filter((cell) => cell.id !== hoveredId)
-            .sort((a, b) => {
-                return (
-                    Math.abs(a.amount - hoveredCell.amount) -
-                    Math.abs(b.amount - hoveredCell.amount)
-                );
-            });
-
-        setHighlightedIds(sorted.slice(0, highlightCount).map((cell) => cell.id));
+        const closestCells = getClosestCells(cells, hoveredId, highlightCount);
+        setHighlightedIds(closestCells.map((cell) => cell.id));
     };
 
     const clearHighlightedCells = () => {

@@ -24,6 +24,8 @@ td {
 th,
 tr td:first-child {
     font-weight: 500;
+    max-width: 160px;
+    max-width: 240px;
 }
 
 td {
@@ -38,11 +40,10 @@ p {
 }
 
 .actionCell {
+    width: 100%;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    min-width: 160px;
-    max-width: 240px;
 }
 
 .dataCell,
@@ -55,7 +56,7 @@ p {
 }
 
 .highlightedCell {
-    background-color: var(--color-nearest-cell);
+    background-color: var(--color-closest-cell);
 }
 
 .percentageCell {
