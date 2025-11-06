@@ -4,9 +4,11 @@ import { Table } from 'components/Table';
 import 'styles/index.css';
 import 'styles/variables.css';
 
+const base = process.env.PUBLIC_URL || '/';
+
 function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={base}>
             <Routes>
                 <Route path={'/'} Component={SetupPanel} key={'create'} />
                 <Route path={'/table'} Component={Table} key={'table'} />
