@@ -5,40 +5,42 @@ interface Props {
     onChange: (value: number | '') => void;
     min?: number;
     max?: number;
-};
+}
 
-export const NumberInput: React.FC<Props> = ({ 
-    label,
-    value,
-    onChange,
-    min,
-    max
- }: Props) => {
-
+export const NumberInput: React.FC<Props> = ({ label, value, onChange, min, max }: Props) => {
     const inputId = useMemo(() => label.replace(/\s+/g, ''), [label]);
 
-    const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value === '' ? '' : Number(event.target.value);
+    const onChangeHandler = useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            const enteredValue = event.target.value === '' ? '' : Number(event.target.value);
+            if (enteredValue === '') {
+                onChange('');
+                return;
+            }
 
-        if (value === "" || (value >= (min ?? 0) && value <= (max ?? 999))) {
-            onChange(value);
-        };        
-    }, [min, max, onChange]);
+            const value = Number(enteredValue);
 
-    return(
+            if (Number.isNaN(value) || !Number.isFinite(value)) {
+                return;
+            }
+
+            if (value >= (min ?? 0) && value <= (max ?? 999)) {
+                onChange(value);
+            }
+        },
+        [min, max, onChange],
+    );
+
+    return (
         <div className="inputContainer">
-            <label 
-                htmlFor={inputId}
-            >
-                {label}
-            </label>
-            <input 
+            <label htmlFor={inputId}>{label}</label>
+            <input
                 id={inputId}
                 type="number"
                 value={value}
                 onChange={onChangeHandler}
                 min={min}
-                max={max}                
+                max={max}
             />
         </div>
     );

@@ -2,8 +2,8 @@ type cellId = number;
 type CellValue = number;
 
 export type Cell = {
-    id: cellId,
-    amount: CellValue
+    id: cellId;
+    amount: CellValue;
 };
 
 export type DataRow = Cell[];

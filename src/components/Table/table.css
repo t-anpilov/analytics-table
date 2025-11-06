@@ -2,7 +2,7 @@
     padding: 30px 40px;
     display: grid;
     gap: 24px;
-} 
+}
 
 table {
     border-collapse: collapse;
@@ -15,31 +15,39 @@ thead {
     text-align: left;
 }
 
-th, td {
+th,
+td {
     padding: 8px 12px;
-    border: 1px solid black;    
+    border: 1px solid black;
 }
 
-th, tr td:first-child {
+th,
+tr td:first-child {
     font-weight: 500;
 }
 
 td {
     white-space: nowrap;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
 }
 
-p { margin: 0 }
+p {
+    margin: 0;
+}
 
 .actionCell {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-width: 200px;
+    min-width: 160px;
+    max-width: 240px;
 }
 
-.dataCell, .sumCell {
-    cursor: pointer;    
+.dataCell,
+.sumCell {
+    cursor: pointer;
 }
 
 .dataCell:hover {
@@ -94,10 +102,9 @@ p { margin: 0 }
     border-color: var(--color-remove-hover-border);
 }
 
-.addButton {    
+.addButton {
     width: 80px;
 }
-
 
 .iconContainer {
     display: flex;

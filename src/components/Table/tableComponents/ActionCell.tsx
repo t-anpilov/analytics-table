@@ -1,23 +1,17 @@
-import { useTableContext } from "context";
+import { useTableContext } from 'context';
 
 interface Props {
     index: number;
-};
+}
 
 export const ActionCell = ({ index }: Props) => {
-
     const { removeRow } = useTableContext();
 
-    return(
+    return (
         <div className="actionCell">
-            <p>
-                Cell Value M={index + 1}
-            </p>
+            <p>Group {index + 1}</p>
             <div className="removeButtonContainer">
-                <button
-                    onClick={() => removeRow(index)}
-                    className="removeButton"
-                >
+                <button onClick={() => removeRow(index)} className="removeButton">
                     Remove
                 </button>
             </div>

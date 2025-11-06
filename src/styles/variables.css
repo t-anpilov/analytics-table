@@ -1,7 +1,7 @@
 :root {
     --color-primary: #333;
     --color-main-layout: #f6f8fb;
-    --color-secondary-layout: #f3f2f6;     
+    --color-secondary-layout: #f3f2f6;
     --color-input-hovered: #1976d2;
     --color-choosen-cell: #2a9d8f;
     --color-nearest-cell: #b8e0d2;
@@ -13,5 +13,5 @@
 
     --color-remove-hover-bg: #f1cccc;
     --color-remove-hover-border: #d8a8a8;
-    --color-remove-text: #a33a3a;    
+    --color-remove-text: #a33a3a;
 }

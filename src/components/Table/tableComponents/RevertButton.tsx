@@ -1,8 +1,8 @@
-import { RevertIcon } from "assets/icons";
+import { RevertIcon } from 'assets/icons';
 
 interface Props {
     onClickHandler: () => void;
-};
+}
 
 export const RevertButton = ({ onClickHandler }: Props) => {
     return (

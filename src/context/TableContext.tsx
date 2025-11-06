@@ -1,6 +1,12 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { DataSet, TableParameters } from '../types';
-import { createNumbersArray, createRandomValuesRow, loadFromLocalStorage, removeFromLocalStorage, saveToLocalStorage } from '../utils';
+import {
+    createNumbersArray,
+    createRandomValuesRow,
+    loadFromLocalStorage,
+    removeFromLocalStorage,
+    saveToLocalStorage,
+} from '../utils';
 
 interface TableContextValue {
     params: TableParameters;
@@ -8,34 +14,29 @@ interface TableContextValue {
     totalRows: number;
     highlightedIds: number[];
     setParams: React.Dispatch<React.SetStateAction<TableParameters>>;
-    generateTable: () => void;    
+    generateTable: () => void;
     updateCell: (cellId: number) => void;
     addRow: (columnCount: number) => void;
     removeRow: (rowIndex: number) => void;
-    setHighlightedCells: (data: DataSet, hoveredId: number, highlightCount: number) => void; 
-    clearHighlightedCells: () => void;   
+    setHighlightedCells: (data: DataSet, hoveredId: number, highlightCount: number) => void;
+    clearHighlightedCells: () => void;
 }
 
 const TableContext = createContext<TableContextValue | undefined>(undefined);
 
 export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-
-    const [params, setParams] = useState<TableParameters>(
-        () => loadFromLocalStorage('tableParams', { m: '', n: '', x: '' })
+    const [params, setParams] = useState<TableParameters>(() =>
+        loadFromLocalStorage('tableParams', { m: '', n: '', x: '' }),
     );
-    const [data, setData] = useState<DataSet>(
-        () => loadFromLocalStorage('tableData', [])
-    );
+    const [data, setData] = useState<DataSet>(() => loadFromLocalStorage('tableData', []));
     // It is used for ensuring unique ids for cells:
-    const [totalRows, setTotalRows] = useState<number>( 
-        () => loadFromLocalStorage('totalRows', 0)
-    ); 
+    const [totalRows, setTotalRows] = useState<number>(() => loadFromLocalStorage('totalRows', 0));
     const [highlightedIds, setHighlightedIds] = useState<number[]>([]);
 
     useEffect(() => saveToLocalStorage('tableParams', params), [params]);
     useEffect(() => saveToLocalStorage('tableData', data), [data]);
     useEffect(() => saveToLocalStorage('totalRows', totalRows), [totalRows]);
-    
+
     const generateTable = () => {
         if (typeof params.m === 'number' && typeof params.n === 'number') {
             const generated = createNumbersArray(params);
@@ -46,17 +47,19 @@ export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     };
 
     const updateCell = (cellId: number) => {
-        setData((prev) => {  
-
+        setData((prev) => {
             const newData = [...prev];
 
             const rowIndex = prev.findIndex((row) => row.some((item) => item.id === cellId));
-            const cellIndex = prev[rowIndex].findIndex((item) => item.id === cellId); 
+            const cellIndex = prev[rowIndex].findIndex((item) => item.id === cellId);
 
-            if ((rowIndex !== -1) && (cellIndex !== -1)) {
+            if (rowIndex !== -1 && cellIndex !== -1) {
                 const newRow = [...newData[rowIndex]];
                 const newCell = newRow[cellIndex];
-                newData[rowIndex][cellIndex] = { ...newCell, amount: newCell.amount + 1 };
+                newData[rowIndex][cellIndex] = {
+                    ...newCell,
+                    amount: newCell.amount + 1,
+                };
             }
 
             return newData;
@@ -67,19 +70,19 @@ export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         setData((prev) => {
             if (!prev || !params.n) return prev;
 
-            const newData = [...prev]; 
+            const newData = [...prev];
             const newRowsCount = totalRows + 1;
             setTotalRows(newRowsCount);
 
-            const newRow = createRandomValuesRow(columnCount, newRowsCount);            
+            const newRow = createRandomValuesRow(columnCount, newRowsCount);
             newData.push(newRow);
-            
+
             return newData;
         });
     };
 
     const removeRow = (rowIndex: number) => {
-        setData(prev => {
+        setData((prev) => {
             if (!prev) return prev;
             const newRows = prev.filter((_, i) => i !== rowIndex);
             return newRows;
@@ -87,7 +90,6 @@ export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     };
 
     const setHighlightedCells = (data: DataSet, hoveredId: number, highlightCount: number) => {
-        
         const cells = data.flat();
         const hoveredCell = cells.find((cell) => cell.id === hoveredId);
         if (!hoveredCell) return;
@@ -96,8 +98,9 @@ export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) =
             .filter((cell) => cell.id !== hoveredId)
             .sort((a, b) => {
                 return (
-                    Math.abs(a.amount - hoveredCell.amount) - Math.abs(b.amount - hoveredCell.amount)
-                )
+                    Math.abs(a.amount - hoveredCell.amount) -
+                    Math.abs(b.amount - hoveredCell.amount)
+                );
             });
 
         setHighlightedIds(sorted.slice(0, highlightCount).map((cell) => cell.id));

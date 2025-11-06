@@ -1,15 +1,13 @@
-import { DataSet } from "types"
+import { DataSet } from 'types';
 
-export const calculateColumnPct = ( data: DataSet, index: number, pct: number) => {
+export const calculateColumnPct = (data: DataSet, index: number, pct: number) => {
     if (data.length === 0) {
-        return
-    };
+        return;
+    }
 
-    let result = NaN
+    let result = NaN;
 
-    const values = data
-        .map((dataRow) => dataRow[index].amount)
-        .sort((a, b) => a - b);
+    const values = data.map((dataRow) => dataRow[index].amount).sort((a, b) => a - b);
 
     const position = (pct / 100) * (values.length - 1);
     const lower = Math.floor(position);
@@ -17,11 +15,11 @@ export const calculateColumnPct = ( data: DataSet, index: number, pct: number) =
 
     if (lower === upper) {
         result = values[lower];
-    } 
+    }
 
     const weight = position - lower;
-    result = values[lower] * (1 - weight) + values[upper] * weight; 
-    
+    result = values[lower] * (1 - weight) + values[upper] * weight;
+
     if (!isNaN(result)) {
         return Math.round(result * 10) / 10;
     }

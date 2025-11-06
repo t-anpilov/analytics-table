@@ -4,9 +4,9 @@ export const saveToLocalStorage = (key: string, value: unknown) => {
 
 export const loadFromLocalStorage = <T>(key: string, fallback: T): T => {
     const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) as T : fallback;
+    return item ? (JSON.parse(item) as T) : fallback;
 };
 
 export const removeFromLocalStorage = (key: string) => {
-  localStorage.removeItem(key);
+    localStorage.removeItem(key);
 };
